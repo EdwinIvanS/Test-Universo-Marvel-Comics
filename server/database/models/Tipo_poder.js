@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
 
     const Tipo_poder = sequelize.define(alias, cols, config);
 
+    
     Tipo_poder.associate = function (models) {
         Tipo_poder.hasMany(models.Seres_has_tipo_poder, { 
             as: "Seres_has_tipo_poder",

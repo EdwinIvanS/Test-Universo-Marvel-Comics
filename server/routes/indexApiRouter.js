@@ -4,14 +4,14 @@ var router = express.Router();
 
 /* Consultar registro. */
 router.get('/allCharacters', mainController.allCharacters);
-router.get('/characters/:id/?lugar', mainController.characters);
-router.get('/listVehicle', mainController.listVehicle);
+router.get('/characters/:nombre/:lugar', mainController.charactersPlaces);
+router.get('/allVehicle', mainController.allVehicle);
 
 /* Crear registro. */
 router.post('/createCharacters', mainController.createCharacters);
 
 /* Actualizar registro. */
-router.put('/updateCharacters', mainController.updateCharacters);
+router.put('/updateCharacters/:id', mainController.updateCharacters);
 
 
 module.exports = router;

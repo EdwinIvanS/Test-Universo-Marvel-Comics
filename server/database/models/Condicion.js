@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     const Condicion = sequelize.define(alias, cols, config);
 
     Condicion.associate = function (models) {
-        Seres.hasMany(models.Seres, { 
+        Condicion.hasMany(models.Seres, { 
             as: "Seres",
             foreignKey: 'id_condicion',
             timestamps: false,

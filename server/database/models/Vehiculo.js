@@ -23,12 +23,13 @@ module.exports = (sequelize, DataTypes) => {
     const Vehiculo = sequelize.define(alias, cols, config);
 
     Vehiculo.associate = function (models) {
-        Vehiculo.belongsTo(models.seres, { 
-            as: "Seres",
-            foreignKey: 'id_seres',
+        Vehiculo.hasMany(models.Seres_has_vehiculo, { 
+            as: "Seres_has_vehiculo",
+            foreignKey: 'seres_id',
             timestamps: false,
             onDelete: 'cascade'
         })
+        
     }
 
     return Vehiculo;

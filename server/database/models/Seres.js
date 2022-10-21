@@ -23,12 +23,6 @@ module.exports = (sequelize, DataTypes) => {
     const Seres = sequelize.define(alias, cols, config);
 
     Seres.associate = function (models) {
-        Seres.hasMany(models.Vehiculo, { 
-            as: "Vehiculo",
-            foreignKey: 'seres_id_seres',
-            timestamps: false,
-            onDelete: 'cascade'
-        });
         Seres.belongsTo(models.Condicion, { 
             as: "Condicion",
             foreignKey: 'id_condicion',
@@ -47,8 +41,16 @@ module.exports = (sequelize, DataTypes) => {
             timestamps: false,
             onDelete: 'cascade'
         });
+        
         Seres.hasMany(models.Seres_has_tipo_poder, { 
             as: "Seres_has_tipo_poder",
+            foreignKey: 'seres_id',
+            timestamps: false,
+            onDelete: 'cascade'
+        });
+
+        Seres.hasMany(models.Seres_has_vehiculo, { 
+            as: "Seres_has_vehiculo",
             foreignKey: 'seres_id',
             timestamps: false,
             onDelete: 'cascade'

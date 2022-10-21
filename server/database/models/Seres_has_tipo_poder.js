@@ -19,12 +19,14 @@ module.exports = (sequelize, DataTypes) => {
     const Seres_has_tipo_poder = sequelize.define(alias, cols, config);
 
     Seres_has_tipo_poder.associate = function (models) {
+        
         Seres_has_tipo_poder.belongsTo(models.Seres, { 
             as: "Seres",
             foreignKey: 'seres_id',
             timestamps: false,
             onDelete: 'cascade'
         });
+        
         Seres_has_tipo_poder.belongsTo(models.Tipo_poder, { 
             as: "Tipo_poder",
             foreignKey: 'tipo_poder_id',
