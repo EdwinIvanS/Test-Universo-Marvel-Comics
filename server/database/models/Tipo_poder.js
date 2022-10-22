@@ -24,13 +24,21 @@ module.exports = (sequelize, DataTypes) => {
 
     
     Tipo_poder.associate = function (models) {
+        
         Tipo_poder.hasMany(models.Seres_has_tipo_poder, { 
             as: "Seres_has_tipo_poder",
             foreignKey: 'tipo_poder_id',
             timestamps: false,
             onDelete: 'cascade'
+        }) 
+        
+        /*
+        Tipo_poder.belongsToMany(models.Seres, {
+            through : "Seres_has_tipo_poder",
+            foreignKey: "tipo_poder_id"
         })
-    }
+        */
+    } 
 
     return Tipo_poder;
 };

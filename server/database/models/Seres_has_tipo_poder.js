@@ -33,6 +33,7 @@ module.exports = (sequelize, DataTypes) => {
             timestamps: false,
             onDelete: 'cascade'
         });
+        
     }
 
     return Seres_has_tipo_poder;

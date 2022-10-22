@@ -48,13 +48,26 @@ module.exports = (sequelize, DataTypes) => {
             timestamps: false,
             onDelete: 'cascade'
         });
-
+        
         Seres.hasMany(models.Seres_has_vehiculo, { 
             as: "Seres_has_vehiculo",
             foreignKey: 'seres_id',
             timestamps: false,
             onDelete: 'cascade'
+        });
+        
+
+        /*
+        Seres.belongsToMany(models.Tipo_poder, { 
+            through : "Seres_has_tipo_poder",
+            foreignKey: "seres_id"
         })
+        
+        Seres.belongsToMany(models.Vehiculo, {
+            through : "Seres_has_vehiculo",
+            foreignKey: "seres_id"
+        })
+        */
     }
 
     return Seres;

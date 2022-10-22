@@ -17,8 +17,9 @@ module.exports = (sequelize, DataTypes) => {
         };
 
     const Seres_has_vehiculo = sequelize.define(alias, cols, config);
-
+       
     Seres_has_vehiculo.associate = function (models) {
+         
         Seres_has_vehiculo.belongsTo(models.Seres, { 
             as: "Seres",
             foreignKey: 'seres_id',

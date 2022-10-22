@@ -3,28 +3,28 @@ const db = require("../database/models");
 const mainController = {
     allCharacters :( async (req,res) => {
         try {
-            const allCharacters = await db.Seres.findAll({
-                include : [
+            const allCharactersRes = await db.Seres.findAll({
+                include : [                    
                     {association:'Condicion'},
                     {association:'Lugar_operacion'},
                     {association:'Grupos'},
-                    {association:'Seres_has_tipo_poder'},
+                    {association : 'Seres_has_tipo_poder'},
                     {association:'Seres_has_vehiculo'}
-                ],
+                ]
             })
-            .then((allCharacters) => {
+            .then((allCharacters) => {                
                 const descripctionAllCharacters = [];
                 allCharacters.map((element,i) =>{
                     descripctionAllCharacters.push({
+                        id : element.id,
                         nombre : element.nombre,
                         condicion : element.Condicion.condicion,
                         lugar_operacion : element.Lugar_operacion.ciudad,
                         grupos : element.Grupos.categoria,
-                        seres_has_tipo_poder : element.Seres_has_tipo_poder[0],
-                        Seres_has_vehiculo : element.Seres_has_vehiculo[0]
+                        seres_has_tipo_poder : element.Seres_has_tipo_poder,
+                        Seres_has_vehiculo : element.Seres_has_vehiculo
                     })
-                })                
-
+                })
                 if(!allCharacters){
                     res.status(404).json({
                         code : "404",
@@ -68,7 +68,6 @@ const mainController = {
     }),
 
     updateCharacters :((req, res)=>{
-        //recibir la informacion del body y con el id del personaje realizo la modificacion
         try {
             db.Seres.update(
                 {

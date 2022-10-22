@@ -23,12 +23,19 @@ module.exports = (sequelize, DataTypes) => {
     const Vehiculo = sequelize.define(alias, cols, config);
 
     Vehiculo.associate = function (models) {
+        
         Vehiculo.hasMany(models.Seres_has_vehiculo, { 
             as: "Seres_has_vehiculo",
-            foreignKey: 'seres_id',
+            foreignKey: 'vehiculo_id',
             timestamps: false,
             onDelete: 'cascade'
         })
+       /*
+        Vehiculo.belongsToMany(models.Seres, { 
+            through : "Seres_has_vehiculo",
+            foreignKey: "vehiculo_id"
+        })
+         */
         
     }
 
