@@ -1,0 +1,25 @@
+.container-search-all{
+    .container-NameCity{
+        .input-searchs{
+            border: 1px solid hsl(0, 0%, 80%);
+            border-radius: 4px;
+            padding-left: 10px;
+            width: 100%;
+            height: 30px;
+        }
+        .table-searchs{
+            border-color: rgb(53, 49, 49);
+            thead{
+                .bg-encabezado{
+                    background-color: var(--Blue);
+                    color: white;
+                    }
+                }
+            tbody{
+                .tr-encabezado {
+                    background-color: white;
+                }
+            } 
+        }
+    }
+}

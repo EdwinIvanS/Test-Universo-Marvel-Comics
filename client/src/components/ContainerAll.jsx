@@ -2,7 +2,7 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 //import {Link} from "react-router-dom"
 
-const ContenedorAll = (props) => {
+const ContainerAll = (props) => {
     return(
         <Container className="container-all">
             <div className="card" >
@@ -19,4 +19,4 @@ const ContenedorAll = (props) => {
     )
 }
 
-export default ContenedorAll;
+export default ContainerAll;

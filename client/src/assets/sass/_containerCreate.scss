@@ -1,0 +1,52 @@
+.container-create-register{
+    div{
+        span{
+            font-size: 23px;
+            display: flex;
+            justify-content: center
+        }
+        form{
+            .mb-3{
+                padding-top: 8px;
+                padding-bottom: 8px;
+            }
+            padding-top: 15px;
+            .form-label{
+                font-size: 17px;
+            }
+            .form-control{
+                border: 1px solid hsl(0, 0%, 80%);
+                border-radius: 4px;
+                padding-left: 10px;
+                width: 96%;
+                height: 30px;
+            }
+            .form-control:hover{
+                border-color: var(--Blue);
+                box-shadow: 0 0 0 1px var(--Blue);
+            }
+            .form-select{
+                border: 1px solid hsl(0, 0%, 80%);
+                border-radius: 4px;
+                width: 100%;
+                height: 35px;
+            }
+            .form-select:hover{
+                border-color: var(--Blue);
+                box-shadow: 0 0 0 1px var(--Blue);
+            }
+            .btn-primary{
+                background-color: var(--Blue);
+                border-radius: 5px;
+                border-color: var(--Blue);
+                color: white;
+                height: 35px;
+                width: 30%;
+            }
+            .btn-primary:hover{
+                background-color: #1d78ee;
+                border-color: #1d78ee;
+            }
+        }
+    }
+}

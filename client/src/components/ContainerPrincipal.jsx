@@ -2,16 +2,19 @@ import React, { useState } from "react";
 import Select from 'react-select'
 import Container from "react-bootstrap/Container";
 import {options} from './list/listSearch';
-import ContenedorAll from "./ContenedorAll";
+import ContainerAll from "./ContainerAll";
+import ContainerNameCity from "./ContainerNameCity";
+import ContainerCreate from "./ContainerCreate";
 
 
 const ContainerPrincipal = () =>{
 
     const[seleccion, setSeleccion] = useState([]);
+    const[modal, setModal] = useState("");
 
     const searchFor = (e) =>{
-        console.log(e.value)
         let busqueda = e.value;
+        setModal(busqueda);
         if(busqueda === 'All'){
             const fetchSelectAll = async () => {
             await fetch(`http://localhost:3001/api/allCharacters`)
@@ -31,9 +34,6 @@ const ContainerPrincipal = () =>{
                 console.log(error) 
             }
         }
-        else if (busqueda === 'All_Name_City'){
-
-        }
         else if (busqueda === 'Create'){
 
         }
@@ -51,20 +51,28 @@ const ContainerPrincipal = () =>{
             <div className="container-general">
                 <form className="list" >
                     <Select options={options} 
-                        defaultValue={{ label : "  Filter by Region", value:''}}
+                        defaultValue={{ label : "  Filter by ", value:''}}
                         className="input-filter"
                         onChange={searchFor}
                     />
                 </form> 
             </div>
             <Container className="container-search-all">
-                { 
-                    seleccion.map((key,i) => {
+                {modal === 'All' && seleccion.map((key,i) => {
                         return(
-                            <ContenedorAll key={i} nombre={key.nombre}  condicion={key.condicion} lugar_operacion={key.lugar_operacion} grupos={key.grupos} />
+                            <ContainerAll   key={i} 
+                                            nombre={key.nombre}  
+                                            condicion={key.condicion} 
+                                            lugar_operacion={key.lugar_operacion} 
+                                            grupos={key.grupos} 
+                            />
                         )
                     })
                 }
+                {(modal === 'All_Name' || modal === 'All_City') && (<ContainerNameCity/>)}
+                { modal === 'Create' && (<ContainerCreate/>)}
+                
+
             </Container>
 
         </React.Fragment>
