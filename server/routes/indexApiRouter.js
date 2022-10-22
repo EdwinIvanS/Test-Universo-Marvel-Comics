@@ -4,7 +4,6 @@ var router = express.Router();
 
 /* Consultar registro. */
 router.get('/allCharacters', mainController.allCharacters);
-router.get('/characters/:nombre/:lugar', mainController.charactersPlaces);
 router.get('/allVehicle', mainController.allVehicle);
 
 /* Crear registro. */

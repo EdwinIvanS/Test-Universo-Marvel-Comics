@@ -7,17 +7,23 @@
             width: 100%;
             height: 30px;
         }
+        .input-searchs:hover{
+            border-color: var(--Blue);
+            box-shadow: 0 0 0 1px var(--Blue);
+        }
         .table-searchs{
             border-color: rgb(53, 49, 49);
+            padding-top: 30px;
             thead{
                 .bg-encabezado{
-                    background-color: var(--Blue);
+                    background-color: var(--VeryDarkBlue);
                     color: white;
                     }
                 }
             tbody{
-                .tr-encabezado {
-                    background-color: white;
+                .tr-encabezado:hover {
+                    background-color: var(--GrayishViolet);
+                    color:white;
                 }
             } 
         }

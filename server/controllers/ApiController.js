@@ -45,19 +45,6 @@ const mainController = {
         }        
     }),
 
-    charactersPlaces :(async(req,res) => {  
-        let consulta = req.params.id;
-        db.Seres.findAll({
-            include : [ {association:'Lugar_operacion'}],
-            where: { id : consulta }
-        })
-        .then((allCharacters) => {
-            res.status(200).json({
-                allCharacters
-            })
-        });
-    }),
-
     createCharacters :(async(req, res)=>{
         db.Seres.create({
             nombre: req.body.nombre,

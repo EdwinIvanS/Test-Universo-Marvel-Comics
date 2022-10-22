@@ -69,7 +69,7 @@ const ContainerPrincipal = () =>{
                         )
                     })
                 }
-                {(modal === 'All_Name' || modal === 'All_City') && (<ContainerNameCity/>)}
+                {(modal === 'All_Name' || modal === 'All_City') && (<ContainerNameCity consulta={modal}/>)}
                 { modal === 'Create' && (<ContainerCreate/>)}
                 
 
