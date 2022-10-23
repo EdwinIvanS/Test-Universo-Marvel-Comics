@@ -12,7 +12,12 @@ module.exports = (sequelize, DataTypes) => {
         nombre: {
             type: DataTypes.STRING(45),
             allowNull: false
+        },
+        imagen: {
+            type: DataTypes.STRING(385),
+            allowNull: false
         }
+
     };
     
     let config = {

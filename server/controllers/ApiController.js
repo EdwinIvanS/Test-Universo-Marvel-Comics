@@ -22,7 +22,8 @@ const mainController = {
                         lugar_operacion : element.Lugar_operacion.ciudad,
                         grupos : element.Grupos.categoria,
                         seres_has_tipo_poder : element.Seres_has_tipo_poder,
-                        Seres_has_vehiculo : element.Seres_has_vehiculo
+                        Seres_has_vehiculo : element.Seres_has_vehiculo,
+                        imagen : element.imagen
                     })
                 })
                 if(!allCharacters){

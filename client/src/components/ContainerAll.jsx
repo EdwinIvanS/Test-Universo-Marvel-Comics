@@ -7,6 +7,7 @@ const ContainerAll = (props) => {
         <Container className="container-all">
             <div className="card" >
                     <div className="card-img">
+                        <img src={props.imagen} alt=""/>
                     </div>
                     <div className="card-description">
                         <h3 className="title">{props.nombre}</h3>

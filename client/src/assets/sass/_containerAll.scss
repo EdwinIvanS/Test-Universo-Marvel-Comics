@@ -4,15 +4,21 @@
     justify-content: center;
     padding-top: 35px;
     .container-all {
-        width: 280px;
+        width: 30%;
         .card{
             background-color: white;
             border: 1px solid var(--Gray);
             margin: 10px;
             padding: 20px;
+            width: 70%;           
 
-            .card_img{
-
+            .card-img{              
+                justify-content: center;
+                width: 100%;
+                border-color: red;
+                img{
+                    width: 100%;                    
+                }
             }
             .card-description{
                 p{

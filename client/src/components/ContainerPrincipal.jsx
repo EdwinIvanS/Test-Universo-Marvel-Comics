@@ -64,7 +64,8 @@ const ContainerPrincipal = () =>{
                                             nombre={key.nombre}  
                                             condicion={key.condicion} 
                                             lugar_operacion={key.lugar_operacion} 
-                                            grupos={key.grupos} 
+                                            grupos={key.grupos}
+                                            imagen={key.imagen}
                             />
                         )
                     })
