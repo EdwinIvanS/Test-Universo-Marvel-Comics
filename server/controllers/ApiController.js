@@ -3,7 +3,7 @@ const db = require("../database/models");
 const mainController = {
     allCharacters :( async (req,res) => {
         try {
-            const allCharactersRes = await db.Seres.findAll({
+            await db.Seres.findAll({
                 include : [                    
                     {association:'Condicion'},
                     {association:'Lugar_operacion'},
@@ -90,7 +90,7 @@ const mainController = {
 
     allVehicle :( async (req, res)=>{
         try {
-            const allVehicle = await db.Vehiculo.findAll({
+            await db.Vehiculo.findAll({
                 include:[ {association:'Seres_has_vehiculo'} ],
                 order: [ ['id', 'ASC'] ]
             })

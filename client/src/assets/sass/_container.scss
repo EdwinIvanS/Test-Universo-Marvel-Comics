@@ -1,14 +1,20 @@
 body{
-    /*background-image: url('../img/marvel-2-scaled.jpg');*/
+    margin: 0px;
+    padding-top: 250px;
+    background-image: url('../img/marvel-superhero.jpg');
     background-color: var(--Very-Light-Gray);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    .container-general {
-        .list {
-            text-align: -webkit-center;
-            .css-b62m3t-container {
-                width: 30%;
+    .App{
+        position: relative;
+        top: -250px;
+        .container-general {
+            .list {
+                text-align: -webkit-center;
+                .css-b62m3t-container {
+                    width: 30%;
+                }
             }
         }
     }

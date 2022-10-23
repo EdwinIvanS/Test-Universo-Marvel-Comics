@@ -4,11 +4,12 @@
         padding-top: 30px;
         thead {
             .bg-encabezado {
-                background-color: var(--VeryDarkBlue);
+                background-color: var(--Blue);
                 color: white;
             }
         }
-        tbody {
+        tbody{
+            background-color: white;
             .tr-encabezado:hover {
                 background-color: var(--GrayishViolet);
                 color: white;
