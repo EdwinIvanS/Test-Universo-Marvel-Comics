@@ -46,10 +46,10 @@ const ContainerNameCity = (props) =>{
             <Table  className="table-searchs">
                 <thead>
                     <tr className="bg-encabezado text-white">
-                        <th>NAME</th>
-                        <th>CONDITION</th>
-                        <th>COUNTRY</th>
-                        <th>COUNTRY</th>
+                        <th>Nombre</th>
+                        <th>Condicion</th>
+                        <th>Pais</th>
+                        <th>Categoria</th>
                     </tr>
                 </thead>
                 <tbody>

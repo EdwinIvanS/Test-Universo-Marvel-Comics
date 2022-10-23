@@ -1,0 +1,18 @@
+.container-Vehicle{
+    .table-searchs {
+        border-color: rgb(53, 49, 49);
+        padding-top: 30px;
+        thead {
+            .bg-encabezado {
+                background-color: var(--VeryDarkBlue);
+                color: white;
+            }
+        }
+        tbody {
+            .tr-encabezado:hover {
+                background-color: var(--GrayishViolet);
+                color: white;
+            }
+        }
+    }
+}

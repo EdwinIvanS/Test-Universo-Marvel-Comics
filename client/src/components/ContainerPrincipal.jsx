@@ -5,6 +5,7 @@ import {options} from './list/listSearch';
 import ContainerAll from "./ContainerAll";
 import ContainerNameCity from "./ContainerNameCity";
 import ContainerCreate from "./ContainerCreate";
+import VehicleAll from "./VehiclesAll";
 
 
 const ContainerPrincipal = () =>{
@@ -41,7 +42,24 @@ const ContainerPrincipal = () =>{
 
         }
         else{
-
+            const fetchVehicleAll = async () => {
+            await fetch(`http://localhost:3001/api/allVehicle`)
+            .then(consulta =>  consulta.json())
+            .then( resultado => {
+                console.log(resultado)
+                let array =[];
+                console.log(resultado);
+                    resultado.allvehiculos?.forEach(e => { array.push(e)}); 
+                    console.log(array)
+                    setSeleccion(array);
+                })
+            }
+            try { 
+                fetchVehicleAll() 
+            } 
+            catch (error) { 
+                console.log(error) 
+            }
         }
     }
 
@@ -60,19 +78,13 @@ const ContainerPrincipal = () =>{
             <Container className="container-search-all">
                 {modal === 'All' && seleccion.map((key,i) => {
                         return(
-                            <ContainerAll   key={i} 
-                                            nombre={key.nombre}  
-                                            condicion={key.condicion} 
-                                            lugar_operacion={key.lugar_operacion} 
-                                            grupos={key.grupos}
-                                            imagen={key.imagen}
-                            />
+                            <ContainerAll key={i} nombre={key.nombre} condicion={key.condicion} lugar_operacion={key.lugar_operacion} grupos={key.grupos} imagen={key.imagen} />
                         )
                     })
                 }
                 {(modal === 'All_Name' || modal === 'All_City') && (<ContainerNameCity consulta={modal}/>)}
                 { modal === 'Create' && (<ContainerCreate/>)}
-                
+                { modal === 'All_Card' && (<VehicleAll/>) }               
 
             </Container>
 

@@ -91,7 +91,8 @@ const mainController = {
     allVehicle :( async (req, res)=>{
         try {
             const allVehicle = await db.Vehiculo.findAll({
-                include:[{association:'Seres_has_vehiculo'}]            
+                include:[ {association:'Seres_has_vehiculo'} ],
+                order: [ ['id', 'ASC'] ]
             })
             .then((allvehiculos) => {
                 if(!allvehiculos){

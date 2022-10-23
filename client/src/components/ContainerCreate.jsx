@@ -2,6 +2,11 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Select from 'react-select'
+import {optionsConditions} from './list/listCondicion';
+import {optionsGrups} from './list/listGrup';
+import {optionsTipoPower} from './list/listTipoPower';
+
 
 const ContainerCreate = () =>{
     return(
@@ -15,7 +20,10 @@ const ContainerCreate = () =>{
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label> Condicion : </Form.Label>
-                        <Form.Select id="condicion" />
+                        <Select options={optionsConditions} 
+                                id="condicion" 
+                                defaultValue={{ label : "  Select by ", value:''}}
+                        />
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label> Ciudad de operacion : </Form.Label>
@@ -23,11 +31,17 @@ const ContainerCreate = () =>{
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label> Grupo : </Form.Label>
-                        <Form.Select id="grupos" />
+                        <Select options={optionsGrups} 
+                                id="grupos" 
+                                defaultValue={{ label : "  Select by ", value:''}}
+                        />
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label> Tipo de poder : </Form.Label>
-                        <Form.Select id="grupos" />
+                        <Select options={optionsTipoPower} 
+                                id="grupos" 
+                                defaultValue={{ label : "  Select by ", value:''}}
+                        />
                     </Form.Group>
                     <Button type="submit">Submit</Button>
                 </Form>
