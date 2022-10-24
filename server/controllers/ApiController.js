@@ -10,7 +10,8 @@ const mainController = {
                     {association:'Grupos'},
                     {association : 'Seres_has_tipo_poder'},
                     {association:'Seres_has_vehiculo'}
-                ]
+                ],
+                order: [ ['id', 'ASC'] ]
             })
             .then((allCharacters) => {                
                 const descripctionAllCharacters = [];
@@ -47,12 +48,32 @@ const mainController = {
     }),
 
     createCharacters :(async(req, res)=>{
-        db.Seres.create({
-            nombre: req.body.nombre,
-            id_grupo: req.body.id_grupo,
-            id_operacion : req.body.id_operacion,
-            id_condicion : req.body.id_condicion
-        })
+        try {
+            db.Seres.create({
+                nombre: req.body.nombre, 
+                id_grupo: req.body.id_grupo,
+                id_operacion : req.body.id_operacion,
+                id_condicion : req.body.id_condicion,
+                imagen : req.body.imagen
+            })
+            .then(result => {
+                if(!result.dataValues.nombre){
+                    res.status(400).json({
+                        code : "400",
+                        status : "Datos faltantes para actualizar el registro"
+                    })
+                }
+                res.status(200).json({
+                    code : "200",
+                    status : "Consulta exitosa"
+                })  
+            })            
+        } catch (error) {
+            res.status(500).json({
+                code : "500",
+                status : "Internal Server Error"
+            })    
+        } 
     }),
 
     updateCharacters :((req, res)=>{

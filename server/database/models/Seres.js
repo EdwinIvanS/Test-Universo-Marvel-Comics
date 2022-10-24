@@ -11,11 +11,11 @@ module.exports = (sequelize, DataTypes) => {
             },
         nombre: {
             type: DataTypes.STRING(45),
-            allowNull: false
+            allowNull: true
         },
         imagen: {
             type: DataTypes.STRING(385),
-            allowNull: false
+            allowNull: true
         }
 
     };
