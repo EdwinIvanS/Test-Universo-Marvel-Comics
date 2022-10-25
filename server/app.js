@@ -9,6 +9,9 @@ const PORT = process.env.PORT || 3001;
 var indexRouter = require('./routes/indexApiRouter');
 
 var app = express();
+var cors = require('cors');
+
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use( ( req, res, next ) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin','Content-Type, Authorization');    
+    res.setHeader('Access-Control-Allow-Headers', "x-access-token, Origin, X-Requested-With, Content-Type, Accept");    
     next();
 });
 

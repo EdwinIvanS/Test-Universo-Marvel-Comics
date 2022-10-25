@@ -49,7 +49,7 @@ const mainController = {
 
     createCharacters :(async(req, res)=>{
         try {
-            db.Seres.create({
+            await db.Seres.create({
                 nombre: req.body.nombre, 
                 id_grupo: req.body.id_grupo,
                 id_operacion : req.body.id_operacion,
