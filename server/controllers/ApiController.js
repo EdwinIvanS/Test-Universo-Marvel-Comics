@@ -116,8 +116,8 @@ const mainController = {
                 }
             })
             .then((idCharacters) => { 
-                const Character = [];
-                Character.push({
+                const character = [];
+                character.push({
                     id : idCharacters.id,
                     nombre : idCharacters.nombre,
                     imagen : idCharacters.imagen,
@@ -132,7 +132,7 @@ const mainController = {
             res.status(200).json({
                 code : "200",
                 status : "Consulta exitosa",
-                Character
+                character
             })                
         });
         } catch (error) {
