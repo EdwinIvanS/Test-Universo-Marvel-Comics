@@ -6,9 +6,24 @@ import Select from 'react-select'
 import {optionsConditions} from './list/listCondicion';
 import {optionsGrups} from './list/listGrup';
 import {optionsTipoPower} from './list/listTipoPower';
-import axios from 'axios'
+import axios from 'axios';
+import { Navigate } from "react-router-dom"
+
 
 const ContainerCreate = () =>{
+
+    /*
+    const state ={
+        errors:{
+            
+            id_grupo: "Campo Obligatorio",
+            id_operacion: "Campo Obligatorio",
+            id_condicion: "Campo Obligatorio",
+            imagen: "Campo Obligatorio",
+            tipoPower: "Campo Obligatorio"
+        }
+    }
+    */
 
     const URL = 'http://localhost:3001/api/createCharacters';
 
@@ -17,19 +32,24 @@ const ContainerCreate = () =>{
     const [id_operacion, setId_operacion] = useState("");
     const [id_condicion, setId_condicion] = useState("");
     const [imagen, setImagen] = useState("");
-    
+
+        
     const storade = async(e)=>{
-        e.preventDefault();
+        //e.preventDefault();
         try {
-            let resul = await axios.post(URL,{
+            await axios.post(URL,{
                 method: "post",
                 headers: {
                 "Accept": "application/JSON",
                 "Content-Type": "application/json"
                 },    
-                nombre:nombre, id_grupo: id_grupo, id_operacion: id_operacion, id_condicion: id_condicion, imagen:imagen 
+                nombre:nombre, 
+                id_grupo: id_grupo, 
+                id_operacion: id_operacion, 
+                id_condicion: id_condicion, 
+                imagen:imagen 
             })
-            return resul;
+            Navigate('/');
         } catch (error) {console.log(error)}
     }
 
@@ -46,7 +66,9 @@ const ContainerCreate = () =>{
                                         value={nombre} 
                                         onChange={(e)=> setNombre(e.target.value)}
                         />
+                        {/*state.errors.nombre && <p>{state.errors.nombre}</p>*/}
                     </div>
+
                     <div className="mb-3">
                         <label> Grupo : </label>
                         <Select options={optionsGrups} 
@@ -54,7 +76,9 @@ const ContainerCreate = () =>{
                                 defaultValue={{ label : "  Select by ", value:''}}
                                 onChange={(e)=> setId_grupo(e.value)}                                
                         />
-                    </div>              
+                        {/*state.errors.id_grupo && <p>{state.errors.id_grupo}</p>*/}
+                    </div>  
+
                     <div className="mb-3">
                         <label> Ciudad de operacion : </label>
                         <Form.Control   name="id_operacion" 
@@ -62,7 +86,9 @@ const ContainerCreate = () =>{
                                         value={id_operacion} 
                                         onChange={(e)=> setId_operacion(e.target.value)}
                         />
+                        {/*state.errors.id_operacion && <p>{state.errors.id_operacion}</p>*/}
                     </div>
+
                     <div className="mb-3">
                         <label> Condicion : </label>
                         <Select options={optionsConditions} 
@@ -70,7 +96,9 @@ const ContainerCreate = () =>{
                                 defaultValue={{ label : "  Select by ", value:''}}
                                 onChange={(e)=> setId_condicion(e.value)}                                
                         />
+                        {/*state.errors.id_condicion && <p>{state.errors.id_condicion}</p>*/}
                     </div>
+
                     <div className="mb-3">
                         <label> URL de la Imagen : </label>
                         <Form.Control   name="imagen"
@@ -78,14 +106,18 @@ const ContainerCreate = () =>{
                                         value={imagen}  
                                         onChange={(e)=> setImagen(e.target.value)}
                         />
+                        {/*state.errors.imagen && <p>{state.errors.imagen}</p>*/}
                     </div>
+
                     <div className="mb-3">
                         <label> Tipo de poder : </label>
                         <Select options={optionsTipoPower} 
                                 name="tipoPower"
                                 defaultValue={{ label : "  Select by ", value:''}}
                         />
-                    </div>                    
+                        {/*state.errors.tipoPower && <p>{state.errors.tipoPower}</p>*/}
+                    </div>
+                    
                     <Button type="submit">Submit</Button>
                 </form>
             </div>

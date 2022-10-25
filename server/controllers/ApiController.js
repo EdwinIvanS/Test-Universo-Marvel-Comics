@@ -57,7 +57,7 @@ const mainController = {
                 imagen : req.body.imagen
             })
             .then(result => {
-                if(!result.dataValues.nombre){
+                if((result.dataValues.nombre=="")||(result.dataValues.id_grupo==0)||(!result.dataValues.id_operacion==0)||(!result.dataValues.id_condicion==0)||(!result.dataValues.imagen=="")){
                     res.status(400).json({
                         code : "400",
                         status : "Datos faltantes para actualizar el registro"
@@ -75,7 +75,74 @@ const mainController = {
             })    
         } 
     }),
+    
+    allVehicle :( async (req, res)=>{
+        try {
+            await db.Vehiculo.findAll({
+                include:[ {association:'Seres_has_vehiculo'} ],
+                order: [ ['id', 'ASC'] ]
+            })
+            .then((allvehiculos) => {
+                if(!allvehiculos){
+                    res.status(404).json({
+                        code : "404",
+                        status : "Búsquedas sin resultados",
+                    })
+                }
+                res.status(200).json({
+                    code : "200",
+                    status : "Consulta exitosa",
+                    allvehiculos
+                })
+            });
+        }
+        catch (error) {
+            res.status(500).json({
+                code : "500",
+                status : "Internal Server Error"
+            })
+        }
+    }),
 
+    Character:(async (req, res)=>{
+        try {
+            console.log(req.params.id);
+            await db.Seres.findOne({
+                include : [
+                    {association:'Lugar_operacion'}
+                ],                    
+                where: {
+                    id: req.params.id
+                }
+            })
+            .then((idCharacters) => { 
+                const Character = [];
+                Character.push({
+                    id : idCharacters.id,
+                    nombre : idCharacters.nombre,
+                    imagen : idCharacters.imagen,
+                    Lugar_operacion : idCharacters.Lugar_operacion.ciudad,
+            })
+            if(!idCharacters){
+                res.status(404).json({
+                    code : "404",
+                    status : "Búsquedas sin resultados",
+                })
+            }
+            res.status(200).json({
+                code : "200",
+                status : "Consulta exitosa",
+                Character
+            })                
+        });
+        } catch (error) {
+            res.status(500).json({
+                code : "500",
+                status : "Internal Server Error"
+            })
+        }
+    }),
+    
     updateCharacters :((req, res)=>{
         try {
             db.Seres.update(
@@ -107,35 +174,7 @@ const mainController = {
             })
         }
         
-    }),
-
-    allVehicle :( async (req, res)=>{
-        try {
-            await db.Vehiculo.findAll({
-                include:[ {association:'Seres_has_vehiculo'} ],
-                order: [ ['id', 'ASC'] ]
-            })
-            .then((allvehiculos) => {
-                if(!allvehiculos){
-                    res.status(404).json({
-                        code : "404",
-                        status : "Búsquedas sin resultados",
-                    })
-                }
-                res.status(200).json({
-                    code : "200",
-                    status : "Consulta exitosa",
-                    allvehiculos
-                })
-            });
-        }
-        catch (error) {
-            res.status(500).json({
-                code : "500",
-                status : "Internal Server Error"
-            })
-        }
-    })
+    })    
 }
 
 module.exports = mainController;

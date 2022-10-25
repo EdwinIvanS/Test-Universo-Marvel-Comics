@@ -6,6 +6,7 @@ import ContainerAll from "./ContainerAll";
 import ContainerNameCity from "./ContainerNameCity";
 import ContainerCreate from "./ContainerCreate";
 import VehicleAll from "./VehiclesAll";
+import ContainerUpdate from "./ContainerUpdate";
 
 
 const ContainerPrincipal = () =>{
@@ -34,12 +35,6 @@ const ContainerPrincipal = () =>{
             catch (error) { 
                 console.log(error) 
             }
-        }
-        else if (busqueda === 'Create'){
-
-        }
-        else if (busqueda === 'Update'){
-
         }
         else{
             const fetchVehicleAll = async () => {
@@ -84,7 +79,8 @@ const ContainerPrincipal = () =>{
                 }
                 {(modal === 'All_Name' || modal === 'All_City') && (<ContainerNameCity consulta={modal}/>)}
                 { modal === 'Create' && (<ContainerCreate/>)}
-                { modal === 'All_Card' && (<VehicleAll/>) }               
+                { modal === 'All_Card' && (<VehicleAll/>) } 
+                { modal === 'Update' && (<ContainerUpdate/>) }                
 
             </Container>
 
