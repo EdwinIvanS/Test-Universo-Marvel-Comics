@@ -1,29 +1,13 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import Container from "react-bootstrap/Container";
 import Table  from "react-bootstrap/Table";
-import { ServiceFetchAllVehicle } from '../components/services/ServiceFetchAllVehicle';
+import { UseFetchAllVehicles } from "./hooks/UseFetchAllVehicles";
 
 const VehicleAll = () => {
 
-    const[seleccion, setSeleccion] = useState([]);
-
+    const {seleccion} = UseFetchAllVehicles();
+    UseFetchAllVehicles();
     
-    
-    useEffect(()=>{
-        const fetchVehicleAll = async () => {
-            ServiceFetchAllVehicle()
-            .then( resultado => {
-                let array =[];
-                resultado.allvehiculos?.forEach(e => { array.push(e)}); 
-                    setSeleccion(array);
-            })
-        }
-        try { fetchVehicleAll()} 
-        catch (error) { console.log(error)}
-    },[])
-
-    
-
     return(
         <Container className="container-Vehicle">
             <Table className="table-searchs">
@@ -34,16 +18,15 @@ const VehicleAll = () => {
                     </tr>                    
                 </thead>
                 <tbody >
-                {   
-                    seleccion.map( (element,i) => (
-                        <tr key={i} className="tr-encabezado">
-                            <td>{element.id}</td>
-                            <td>{element.tipo}</td>
-                        </tr>
-                        )
-                    ) 
-                }
-
+                    {   
+                        seleccion.map( (element,i) => (
+                            <tr key={i} className="tr-encabezado">
+                                <td>{element.id}</td>
+                                <td>{element.tipo}</td>
+                            </tr>
+                            )
+                        ) 
+                    }
                 </tbody>
             </Table>
         </Container>
