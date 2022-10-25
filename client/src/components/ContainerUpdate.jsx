@@ -4,8 +4,9 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from 'axios';
 import { Navigate } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { ServiceFetchNameId } from '../components/services/ServiceFetchNameId'
 
 const ContainerUpdate  = () => {
     
@@ -17,8 +18,7 @@ const ContainerUpdate  = () => {
 
     const consultaId = () =>{
         try {
-        fetch(`http://localhost:3001/api/Character/${id}`)
-        .then(consulta =>  consulta.json())
+        ServiceFetchNameId(id)
         .then(resultado => {
             setResponse(resultado.character[0]);
         })

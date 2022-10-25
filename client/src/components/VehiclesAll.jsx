@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Container from "react-bootstrap/Container";
 import Table  from "react-bootstrap/Table";
+import { ServiceFetchAllVehicle } from '../components/services/ServiceFetchAllVehicle';
 
 const VehicleAll = () => {
 
@@ -10,15 +11,11 @@ const VehicleAll = () => {
     
     useEffect(()=>{
         const fetchVehicleAll = async () => {
-        await fetch(`http://localhost:3001/api/allVehicle`)
-        .then(consulta =>  consulta.json())
-        .then( resultado => {
-            console.log(resultado)
-            let array =[];
-            console.log(resultado);
+            ServiceFetchAllVehicle()
+            .then( resultado => {
+                let array =[];
                 resultado.allvehiculos?.forEach(e => { array.push(e)}); 
-                console.log(array)
-                setSeleccion(array);
+                    setSeleccion(array);
             })
         }
         try { fetchVehicleAll()} 

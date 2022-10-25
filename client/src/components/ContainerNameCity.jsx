@@ -1,6 +1,7 @@
 import React,{ useEffect, useState} from "react";
 import Container from "react-bootstrap/Container";
 import Table  from "react-bootstrap/Table";
+import { ServiceFetchAllNameCity } from '../components/services/ServiceFetchAllNameCity';
 
 const ContainerNameCity = (props) =>{
 
@@ -10,8 +11,7 @@ const ContainerNameCity = (props) =>{
 
     const showData = () =>{ 
         const fetchSelectAll = async () => {
-            await fetch(`http://localhost:3001/api/allCharacters`)
-            .then(consulta =>  consulta.json())
+            ServiceFetchAllNameCity()
             .then( resultado => {
                 let array =[];
                 resultado.descripctionAllCharacters?.forEach(e => { array.push(e)}); 

@@ -7,6 +7,8 @@ import ContainerNameCity from "./ContainerNameCity";
 import ContainerCreate from "./ContainerCreate";
 import VehicleAll from "./VehiclesAll";
 import ContainerUpdate from "./ContainerUpdate";
+import { ServiceFetchAllCharacters } from '../components/services/ServiceFetchAllCharacters'
+import { ServiceFetchAllVehicle } from '../components/services/ServiceFetchAllVehicle'
 
 
 const ContainerPrincipal = () =>{
@@ -19,34 +21,27 @@ const ContainerPrincipal = () =>{
         setModal(busqueda);
         if(busqueda === 'All'){
             const fetchSelectAll = async () => {
-            await fetch(`http://localhost:3001/api/allCharacters`)
-            .then(consulta =>  consulta.json())
-            .then( resultado => {
-                console.log(resultado)
-                let array =[];
-                    resultado.descripctionAllCharacters?.forEach(e => { array.push(e)}); 
-                    console.log(array)
-                    setSeleccion(array);
-                })
-            }
-            try { 
-                fetchSelectAll() 
-            } 
-            catch (error) { 
-                console.log(error) 
+                await ServiceFetchAllCharacters()
+                .then( resultado => {
+                    let array =[];
+                        resultado.descripctionAllCharacters?.forEach(e => { array.push(e)}); 
+                        setSeleccion(array);
+                    })
+                }
+                try { 
+                    fetchSelectAll() 
+                } 
+                catch (error) { 
+                    console.log(error) 
             }
         }
         else{
             const fetchVehicleAll = async () => {
-            await fetch(`http://localhost:3001/api/allVehicle`)
-            .then(consulta =>  consulta.json())
-            .then( resultado => {
-                console.log(resultado)
-                let array =[];
-                console.log(resultado);
-                    resultado.allvehiculos?.forEach(e => { array.push(e)}); 
-                    console.log(array)
-                    setSeleccion(array);
+                ServiceFetchAllVehicle()
+                .then( resultado => {
+                    let array =[];
+                        resultado.allvehiculos?.forEach(e => { array.push(e)}); 
+                        setSeleccion(array);
                 })
             }
             try { 

@@ -11,20 +11,6 @@ import { Navigate } from "react-router-dom"
 
 
 const ContainerCreate = () =>{
-
-    /*
-    const state ={
-        errors:{
-            
-            id_grupo: "Campo Obligatorio",
-            id_operacion: "Campo Obligatorio",
-            id_condicion: "Campo Obligatorio",
-            imagen: "Campo Obligatorio",
-            tipoPower: "Campo Obligatorio"
-        }
-    }
-    */
-
     const URL = 'http://localhost:3001/api/createCharacters';
 
     const [nombre, setNombre] = useState("");
