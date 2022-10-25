@@ -11,7 +11,7 @@ export const UseFetchAllVehicles = () =>{
             .then( resultado => {
                 let array =[];
                 resultado.allvehiculos?.forEach(e => { array.push(e)}); 
-                    setSeleccion(array);
+                setSeleccion(array);
             })
         }
         try { fetchVehicleAll()} 

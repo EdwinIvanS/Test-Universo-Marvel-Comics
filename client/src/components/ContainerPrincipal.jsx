@@ -8,11 +8,10 @@ import ContainerCreate from "./ContainerCreate";
 import VehicleAll from "./VehiclesAll";
 import ContainerUpdate from "./ContainerUpdate";
 import { ServiceFetchAllCharacters } from '../components/services/ServiceFetchAllCharacters'
-import { ServiceFetchAllVehicle } from '../components/services/ServiceFetchAllVehicle'
 
 
 const ContainerPrincipal = () =>{
-
+    
     const[seleccion, setSeleccion] = useState([]);
     const[modal, setModal] = useState("");
 
@@ -21,38 +20,17 @@ const ContainerPrincipal = () =>{
         setModal(busqueda);
         if(busqueda === 'All'){
             const fetchSelectAll = async () => {
-                await ServiceFetchAllCharacters()
+                ServiceFetchAllCharacters()
                 .then( resultado => {
                     let array =[];
                         resultado.descripctionAllCharacters?.forEach(e => { array.push(e)}); 
                         setSeleccion(array);
                     })
-                }
-                try { 
-                    fetchSelectAll() 
-                } 
-                catch (error) { 
-                    console.log(error) 
             }
-        }
-        else{
-            const fetchVehicleAll = async () => {
-                ServiceFetchAllVehicle()
-                .then( resultado => {
-                    let array =[];
-                        resultado.allvehiculos?.forEach(e => { array.push(e)}); 
-                        setSeleccion(array);
-                })
-            }
-            try { 
-                fetchVehicleAll() 
-            } 
-            catch (error) { 
-                console.log(error) 
-            }
+            try { fetchSelectAll() } 
+            catch (error) {console.log(error)}
         }
     }
-
 
     return(        
         <React.Fragment>
