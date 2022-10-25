@@ -25,6 +25,8 @@ const ContainerUpdate  = () => {
         } catch (error) {console.log(error)}
     }
 
+
+    /*
     const storade = async(e)=>{
         try {
             await axios.post(URL,{
@@ -39,6 +41,8 @@ const ContainerUpdate  = () => {
             Navigate('/');
         } catch (error) {console.log(error)}
     }
+
+    */
 
     return (
         <Container className="container-update-register">

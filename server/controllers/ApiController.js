@@ -28,19 +28,19 @@ const mainController = {
                     })
                 })
                 if(!allCharacters){
-                    res.status(404).json({
+                    return res.status(404).json({
                         code : "404",
                         status : "Búsquedas sin resultados",
                     })
                 }
-                res.status(200).json({
+                return res.status(200).json({
                     code : "200",
                     status : "Consulta exitosa",
                     descripctionAllCharacters
                 })
             });
         } catch (error) {
-            res.status(500).json({
+            return res.status(500).json({
                 code : "500",
                 status : "Internal Server Error"
             })
@@ -48,32 +48,41 @@ const mainController = {
     }),
 
     createCharacters :(async(req, res)=>{
-        try {
-            await db.Seres.create({
-                nombre: req.body.nombre, 
-                id_grupo: req.body.id_grupo,
-                id_operacion : req.body.id_operacion,
-                id_condicion : req.body.id_condicion,
-                imagen : req.body.imagen
+        
+        if((req.body.nombre!=='') && (req.body.id_grupo!=='') && (req.body.id_operacion!=='') && (req.body.id_condicion!=='') && (req.body.imagen!=='') ){
+            try {
+                await db.Seres.create({
+                    nombre: req.body.nombre, 
+                    id_grupo: req.body.id_grupo,
+                    id_operacion : req.body.id_operacion,
+                    id_condicion : req.body.id_condicion,
+                    imagen : req.body.imagen
+                })
+                .then(result => {
+                    if((!result)){
+                        return res.status(400).json({
+                            code : "400",
+                            status : "Datos faltantes para actualizar el registro"
+                        })
+                    }
+                    return res.status(200).json({
+                        code : "200",
+                        status : "Registro exitoso"
+                    })  
+                })            
+            } catch (error) {
+                return res.status(500).json({
+                    code : "500",
+                    status : "Internal Server Error"
+                })    
+            } 
+        }
+        else{
+            return res.status(400).json({
+                code : "400",
+                status : "Datos faltantes para actualizar el registro"
             })
-            .then(result => {
-                if((result.dataValues.nombre=="")||(result.dataValues.id_grupo==0)||(!result.dataValues.id_operacion==0)||(!result.dataValues.id_condicion==0)||(!result.dataValues.imagen=="")){
-                    res.status(400).json({
-                        code : "400",
-                        status : "Datos faltantes para actualizar el registro"
-                    })
-                }
-                res.status(200).json({
-                    code : "200",
-                    status : "Consulta exitosa"
-                })  
-            })            
-        } catch (error) {
-            res.status(500).json({
-                code : "500",
-                status : "Internal Server Error"
-            })    
-        } 
+        }
     }),
     
     allVehicle :( async (req, res)=>{
@@ -84,12 +93,12 @@ const mainController = {
             })
             .then((allvehiculos) => {
                 if(!allvehiculos){
-                    res.status(404).json({
+                    return res.status(404).json({
                         code : "404",
                         status : "Búsquedas sin resultados",
                     })
                 }
-                res.status(200).json({
+                return res.status(200).json({
                     code : "200",
                     status : "Consulta exitosa",
                     allvehiculos
@@ -97,7 +106,7 @@ const mainController = {
             });
         }
         catch (error) {
-            res.status(500).json({
+            return res.status(500).json({
                 code : "500",
                 status : "Internal Server Error"
             })
@@ -124,19 +133,19 @@ const mainController = {
                     Lugar_operacion : idCharacters.Lugar_operacion.ciudad,
             })
             if(!idCharacters){
-                res.status(404).json({
+                return res.status(404).json({
                     code : "404",
                     status : "Búsquedas sin resultados",
                 })
             }
-            res.status(200).json({
+            return res.status(200).json({
                 code : "200",
                 status : "Consulta exitosa",
                 character
             })                
         });
         } catch (error) {
-            res.status(500).json({
+            return res.status(500).json({
                 code : "500",
                 status : "Internal Server Error"
             })
@@ -156,19 +165,19 @@ const mainController = {
             )
             .then((updateCharacters) => { 
                 if(!updateCharacters){
-                    res.status(400).json({
+                    return res.status(400).json({
                         code : "400",
                         status : "Datos faltantes para actualizar el registro"
                     })
                 }
-                res.status(201).json({
+                return res.status(201).json({
                     code : "201",
                     status : "Registro actualizado "
                 })
             });
 
         } catch (error) {
-            res.status(500).json({
+            return res.status(500).json({
                 code : "500",
                 status : "Internal Server Error"
             })

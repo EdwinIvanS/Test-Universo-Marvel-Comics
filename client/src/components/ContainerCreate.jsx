@@ -21,7 +21,6 @@ const ContainerCreate = () =>{
 
         
     const storade = async(e)=>{
-        //e.preventDefault();
         try {
             await axios.post(URL,{
                 method: "post",
@@ -35,8 +34,9 @@ const ContainerCreate = () =>{
                 id_condicion: id_condicion, 
                 imagen:imagen 
             })
-            Navigate('/');
+            return Navigate('/');
         } catch (error) {console.log(error)}
+        
     }
 
     return(
