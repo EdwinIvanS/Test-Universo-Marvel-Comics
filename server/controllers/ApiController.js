@@ -178,7 +178,7 @@ const mainController = {
                     }
                     return res.status(200).json({
                         code : "200",
-                        status : "Consulta exitosa"
+                        status : "Registro actualizado"
                     })
                 })
             })
