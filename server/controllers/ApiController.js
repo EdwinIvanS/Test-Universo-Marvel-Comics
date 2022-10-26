@@ -115,7 +115,6 @@ const mainController = {
 
     Character:(async (req, res)=>{
         try {
-            console.log(req.params.id);
             await db.Seres.findOne({
                 include : [
                     {association:'Lugar_operacion'}
@@ -125,25 +124,27 @@ const mainController = {
                 }
             })
             .then((idCharacters) => { 
-                const character = [];
-                character.push({
-                    id : idCharacters.id,
-                    nombre : idCharacters.nombre,
-                    imagen : idCharacters.imagen,
-                    Lugar_operacion : idCharacters.Lugar_operacion.ciudad,
-            })
-            if(!idCharacters){
-                return res.status(404).json({
-                    code : "404",
-                    status : "Búsquedas sin resultados",
-                })
-            }
-            return res.status(200).json({
-                code : "200",
-                status : "Consulta exitosa",
-                character
-            })                
-        });
+                if(idCharacters!== null){
+                    const character = [];
+                    character.push({
+                        id : idCharacters.id,
+                        nombre : idCharacters.nombre,
+                        imagen : idCharacters.imagen,
+                        Lugar_operacion : idCharacters.Lugar_operacion.ciudad,
+                    })
+                    return res.status(200).json({
+                        code : "200",
+                        status : "Consulta exitosa",
+                        character
+                    })
+                }
+                if(idCharacters== null){
+                    return res.status(404).json({
+                        code : "404",
+                        status : "No existe registro para el valor consultado",
+                    })
+                }                            
+            });
         } catch (error) {
             return res.status(500).json({
                 code : "500",
