@@ -1,4 +1,4 @@
-import React,{  useState } from "react";
+import React,{ useState } from "react";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -9,40 +9,41 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { ServiceFetchNameId } from '../components/services/ServiceFetchNameId'
 
 const ContainerUpdate  = () => {
-    
-    //const URL = 'http://localhost:3001/api/updateCharacters/:id';
+
     const [id, setId] = useState("");
-    const [response, setResponse] = useState([]);
     const [nombre, setNombre] = useState("");
-    const [id_operacion, setId_operacion] = useState("");
+    const [imagen, setimagen] = useState("");
+    const [Lugar_operacion, setLugar_operacion] = useState("");   
+    const [idOperacion, setIdOperacion] = useState(""); 
 
-    const consultaId = () =>{
+    const update = async(e)=>{
         try {
-        ServiceFetchNameId(id)
-        .then(resultado => {
-            setResponse(resultado.character[0]);
-        })
-        } catch (error) {console.log(error)}
-    }
-
-
-    /*
-    const storade = async(e)=>{
-        try {
-            await axios.post(URL,{
-                method: "post",
+            await axios.put(`http://localhost:3001/api/updateCharacters/${id}`,{
+                method: "put",
                 headers: {
                 "Accept": "application/JSON",
                 "Content-Type": "application/json"
                 },    
-                nombre: nombre, 
-                id_operacion: id_operacion
+                nombre: nombre,
+                imagen: imagen,
+                id_Ope : idOperacion, 
+                Lugar_operacion: Lugar_operacion
             })
             Navigate('/');
         } catch (error) {console.log(error)}
     }
 
-    */
+    const consultaId = () =>{
+        try {
+        ServiceFetchNameId(id)
+        .then(resultado => {
+            setNombre(resultado.character[0].nombre);  
+            setimagen(resultado.character[0].imagen);
+            setIdOperacion(resultado.character[0].id_operacion);
+            setLugar_operacion(resultado.character[0].Lugar_operacion);
+        })
+        } catch (error) {console.log(error)}
+    }
 
     return (
         <Container className="container-update-register">
@@ -52,13 +53,14 @@ const ContainerUpdate  = () => {
                 <button className="bto_search" onClick={consultaId}>
                     <FontAwesomeIcon icon={faSearch} />
                 </button>  
-                <form >
+                <form onSubmit={update}>
                     <div className="mb-3">
                         <label> Nombre del Mutante : </label>
                         <Form.Control   name="nombre"
                                         type="text"
-                                        value={response.nombre} 
-                                        onChange={(e)=> setNombre(e.target.value)}
+                                        value={nombre} 
+                                        onChange={(e)=> setNombre(e.target.value)
+                                        }
                         />
                         {/*state.errors.nombre && <p>{state.errors.nombre}</p>*/}
                     </div>
@@ -67,8 +69,8 @@ const ContainerUpdate  = () => {
                         <label> Ciudad de operacion : </label>
                         <Form.Control   name="id_operacion" 
                                         type="text"
-                                        value={response.Lugar_operacion} 
-                                        onChange={(e)=> setId_operacion(e.target.value)}
+                                        value={Lugar_operacion} 
+                                        onChange={(e)=> setLugar_operacion(e.target.value)}
                         />
                         {/*state.errors.id_operacion && <p>{state.errors.id_operacion}</p>*/}
                     </div>

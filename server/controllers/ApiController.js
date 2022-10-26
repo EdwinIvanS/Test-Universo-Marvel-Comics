@@ -85,7 +85,7 @@ const mainController = {
         }
     }),
     
-    allVehicle :( async (req, res)=>{
+    allVehicle :(async (req, res)=>{
         try {
             await db.Vehiculo.findAll({
                 include:[ {association:'Seres_has_vehiculo'} ],
@@ -114,13 +114,14 @@ const mainController = {
     }),
 
     Character:(async (req, res)=>{
+        const id = req.params.id;
         try {
             await db.Seres.findOne({
                 include : [
                     {association:'Lugar_operacion'}
                 ],                    
                 where: {
-                    id: req.params.id
+                    id: id
                 }
             })
             .then((idCharacters) => { 
@@ -130,6 +131,7 @@ const mainController = {
                         id : idCharacters.id,
                         nombre : idCharacters.nombre,
                         imagen : idCharacters.imagen,
+                        id_operacion: idCharacters.Lugar_operacion.id,
                         Lugar_operacion : idCharacters.Lugar_operacion.ciudad,
                     })
                     return res.status(200).json({
@@ -153,37 +155,39 @@ const mainController = {
         }
     }),
     
-    updateCharacters :((req, res)=>{
+    updateCharacters :( async (req, res)=>{
         try {
-            db.Seres.update(
-                {
-                    nombre : nombre,
-                    id_operacion : operacion
-                },
-                { 
-                    where: {id: req.params.id}
-                }            
+            const updateNombre = db.Seres.update(
+                {nombre : req.body.nombre},
+                {where: { id: req.params.id} }
             )
-            .then((updateCharacters) => { 
-                if(!updateCharacters){
-                    return res.status(400).json({
-                        code : "400",
-                        status : "Datos faltantes para actualizar el registro"
-                    })
-                }
-                return res.status(201).json({
-                    code : "201",
-                    status : "Registro actualizado "
+            .then( resultado => {
+                db.Seres.findOne(
+                    {where: { id: req.params.id }
                 })
-            });
-
+                .then(resp =>{
+                    db.Lugar_operacion.update(
+                        {ciudad : req.body.Lugar_operacion},
+                        {where: { id: resp.id_operacion} }
+                    )
+                    if(!resp){
+                        return res.status(404).json({
+                            code : "404",
+                            status : "Búsquedas sin resultados",
+                        })
+                    }
+                    return res.status(200).json({
+                        code : "200",
+                        status : "Consulta exitosa"
+                    })
+                })
+            })
         } catch (error) {
             return res.status(500).json({
                 code : "500",
                 status : "Internal Server Error"
             })
-        }
-        
+        }        
     })    
 }
 
