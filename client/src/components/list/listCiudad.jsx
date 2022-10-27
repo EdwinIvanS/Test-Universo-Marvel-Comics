@@ -1,0 +1,20 @@
+export const optionsCiudad = [
+    { value: '1', label: 'sutamarchan' },
+    { value: '2', label: 'wakanda' },
+    { value: '3', label: 'los angeles' },
+    { value: '4', label: 'asgard' },
+    { value: '5', label: 'EEUU' },
+    { value: '6', label: 'nueva york' },
+    { value: '7', label: 'chicago' },
+    { value: '8', label: 'huston' },
+    { value: '9', label: 'phoenix' },
+    { value: '10', label: 'san antonio' },
+    { value: '11', label: 'filadelfia' },
+    { value: '12', label: 'dallas' },
+    { value: '13', label: 'austin' },
+    { value: '14', label: 'columbus' },
+    { value: '15', label: 'boston' },
+    { value: '16', label: 'las vegas' },
+    { value: '17', label: 'mephis' },
+    { value: '18', label: 'oaklan' }
+]

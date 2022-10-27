@@ -51,7 +51,6 @@ const mainController = {
     }),
 
     createCharacters :(async(req, res)=>{
-        
         if((req.body.nombre!=='') && (req.body.id_grupo!=='') && (req.body.id_operacion!=='') && (req.body.id_condicion!=='') && (req.body.imagen!=='') ){
             try {
                 await db.Seres.create({

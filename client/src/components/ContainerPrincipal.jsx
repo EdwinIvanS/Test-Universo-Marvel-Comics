@@ -44,9 +44,10 @@ const ContainerPrincipal = () =>{
                 </form> 
             </div>
             <Container className="container-search-all">
-                {modal === 'All' && seleccion.map((key,i) => {
-                        return(
-                            <ContainerAll key={i} nombre={key.nombre} condicion={key.condicion} lugar_operacion={key.lugar_operacion} grupos={key.grupos} imagen={key.imagen} />
+                {
+                modal === 'All' && seleccion.map((key,i) => {
+                    return(
+                        <ContainerAll key={i} nombre={key.nombre} condicion={key.condicion} lugar_operacion={key.lugar_operacion} grupos={key.grupos} imagen={key.imagen} />
                         )
                     })
                 }

@@ -6,13 +6,13 @@ import Select from 'react-select'
 import {optionsConditions} from './list/listCondicion';
 import {optionsGrups} from './list/listGrup';
 import {optionsTipoPower} from './list/listTipoPower';
+import { optionsCiudad } from "./list/listCiudad";
 import axios from 'axios';
 import { Navigate } from "react-router-dom"
 
 
 const ContainerCreate = () =>{
-    const URL = 'http://localhost:3001/api/createCharacters';
-
+    
     const [nombre, setNombre] = useState("");
     const [id_grupo, setId_grupo] = useState("");
     const [id_operacion, setId_operacion] = useState("");
@@ -22,7 +22,7 @@ const ContainerCreate = () =>{
         
     const storade = async(e)=>{
         try {
-            await axios.post(URL,{
+            await axios.post('http://localhost:3001/api/createCharacters',{
                 method: "post",
                 headers: {
                 "Accept": "application/JSON",
@@ -67,10 +67,10 @@ const ContainerCreate = () =>{
 
                     <div className="mb-3">
                         <label> Ciudad de operacion : </label>
-                        <Form.Control   name="id_operacion" 
-                                        type="text"
-                                        value={id_operacion} 
-                                        onChange={(e)=> setId_operacion(e.target.value)}
+                        <Select options={optionsCiudad} 
+                                name="id_operacion"                                 
+                                defaultValue={{ label : "  Select by ", value:''}}
+                                onChange={(e)=> setId_operacion(e.value)}                                
                         />
                         {/*state.errors.id_operacion && <p>{state.errors.id_operacion}</p>*/}
                     </div>
