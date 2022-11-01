@@ -34,7 +34,8 @@ const ContainerCreate = () =>{
                 id_condicion: id_condicion, 
                 imagen:imagen 
             })
-            return Navigate('/');
+            
+            return Navigate('/').alert('Registro Creado');
         } catch (error) {console.log(error)}
         
     }

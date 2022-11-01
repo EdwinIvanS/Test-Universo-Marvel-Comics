@@ -6,15 +6,16 @@ import axios from 'axios';
 import { Navigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { ServiceFetchNameId } from '../components/services/ServiceFetchNameId'
+import { ServiceFetchNameId } from '../components/services/ServiceFetchNameId';
+import Select from 'react-select';
+import { optionsCiudad } from "./list/listCiudad";
+
 
 const ContainerUpdate  = () => {
 
     const [id, setId] = useState("");
-    const [nombre, setNombre] = useState("");
-    const [imagen, setimagen] = useState("");
-    const [Lugar_operacion, setLugar_operacion] = useState("");   
-    const [idOperacion, setIdOperacion] = useState(""); 
+    const [nombre, setNombre] = useState("");  
+    const [idOperacion, setIdOperacion] = useState("");
 
     const update = async(e)=>{
         try {
@@ -23,11 +24,10 @@ const ContainerUpdate  = () => {
                 headers: {
                 "Accept": "application/JSON",
                 "Content-Type": "application/json"
-                },    
+                },
+                id : id,    
                 nombre: nombre,
-                imagen: imagen,
-                id_Ope : idOperacion, 
-                Lugar_operacion: Lugar_operacion
+                id_Ope : idOperacion
             })
             Navigate('/');
         } catch (error) {console.log(error)}
@@ -37,12 +37,17 @@ const ContainerUpdate  = () => {
         try {
         ServiceFetchNameId(id)
         .then(resultado => {
-            setNombre(resultado.character[0].nombre);  
-            setimagen(resultado.character[0].imagen);
-            setIdOperacion(resultado.character[0].id_operacion);
-            setLugar_operacion(resultado.character[0].Lugar_operacion);
+            if(resultado.code==='200'){ 
+                setNombre(resultado.character[0].nombre);  
+                setIdOperacion(resultado.character[0].id_operacion);
+            }
+            else{
+                return alert("No existe informacion para el registro consultado");                
+            }
         })
-        } catch (error) {console.log(error)}
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
@@ -67,11 +72,18 @@ const ContainerUpdate  = () => {
 
                     <div className="mb-3">
                         <label> Ciudad de operacion : </label>
+                        <Select options={optionsCiudad} 
+                                name="id_operacion"                           
+                                value={ optionsCiudad[idOperacion-1] }
+                                onChange={(e)=> setIdOperacion(e.value)}                                
+                        />
+                        {/*
                         <Form.Control   name="id_operacion" 
                                         type="text"
                                         value={Lugar_operacion} 
                                         onChange={(e)=> setLugar_operacion(e.target.value)}
                         />
+                        */}
                         {/*state.errors.id_operacion && <p>{state.errors.id_operacion}</p>*/}
                     </div>
                                         

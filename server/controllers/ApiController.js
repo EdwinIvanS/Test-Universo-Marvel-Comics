@@ -51,6 +51,7 @@ const mainController = {
     }),
 
     createCharacters :(async(req, res)=>{
+        console.log(req.body)
         if((req.body.nombre!=='') && (req.body.id_grupo!=='') && (req.body.id_operacion!=='') && (req.body.id_condicion!=='') && (req.body.imagen!=='') ){
             try {
                 await db.Seres.create({
@@ -160,30 +161,23 @@ const mainController = {
     updateCharacters :( async (req, res)=>{
         try {
             const updateNombre = db.Seres.update(
-                {nombre : req.body.nombre},
+                {nombre : req.body.nombre , id_operacion:req.body.id_Ope},
                 {where: { id: req.params.id} }
             )
-            .then( resultado => {
-                db.Seres.findOne(
-                    {where: { id: req.params.id }
-                })
-                .then(resp =>{
-                    db.Lugar_operacion.update(
-                        {ciudad : req.body.Lugar_operacion},
-                        {where: { id: resp.id_operacion} }
-                    )
-                    if(!resp){
-                        return res.status(404).json({
-                            code : "404",
-                            status : "El registro no puede ser actualizado",
-                        })
-                    }
+            .then(respuesta =>{
+                if(respuesta[0]){
                     return res.status(200).json({
                         code : "200",
                         status : "Registro actualizado"
                     })
-                })
-            })
+                }
+                else{
+                    return res.status(404).json({
+                        code : "404",
+                        status : "El registro no puede ser actualizado",
+                    })
+                }
+            })            
         } catch (error) {
             return res.status(500).json({
                 code : "500",
