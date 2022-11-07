@@ -6,7 +6,6 @@ import axios from 'axios';
 import { Navigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { ServiceFetchNameId } from '../components/services/ServiceFetchNameId';
 import Select from 'react-select';
 import { optionsCiudad } from "./list/listCiudad";
 
@@ -35,7 +34,8 @@ const ContainerUpdate  = () => {
 
     const consultaId = () =>{
         try {
-        ServiceFetchNameId(id)
+        fetch(`http://localhost:3001/api/Character/${id}`)
+    .then(consulta =>  consulta.json())
         .then(resultado => {
             if(resultado.code==='200'){ 
                 setNombre(resultado.character[0].nombre);  

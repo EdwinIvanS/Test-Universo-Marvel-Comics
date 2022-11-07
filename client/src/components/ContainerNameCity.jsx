@@ -1,9 +1,8 @@
 import React,{ useEffect, useState} from "react";
 import Container from "react-bootstrap/Container";
 import Table  from "react-bootstrap/Table";
-import { ServiceFetchAllNameCity } from '../components/services/ServiceFetchAllNameCity';
 
-const ContainerNameCity = (props) =>{
+const ContainerNameCity = () =>{
 
     const[seleccion, setSeleccion] = useState([]);
     const[search, setSearch] = useState("");
@@ -11,7 +10,8 @@ const ContainerNameCity = (props) =>{
 
     const showData = () =>{ 
         const fetchSelectAll = async () => {
-            ServiceFetchAllNameCity()
+            fetch(`http://localhost:3001/api/allCharacters`)
+            .then(consulta =>  consulta.json())
             .then( resultado => {
                 let array =[];
                 resultado.descripctionAllCharacters?.forEach(e => { array.push(e)}); 
@@ -23,8 +23,8 @@ const ContainerNameCity = (props) =>{
     }
     
     const searcher = (e) =>{    
-        setModal(props.consulta)    
-        setSearch(e.target.value)
+        //setModal(props.consulta)    
+        //setSearch(e.target.value)
     }
 
     let resultado="";    
@@ -53,7 +53,7 @@ const ContainerNameCity = (props) =>{
                     </tr>
                 </thead>
                 <tbody>
-                {   resultado.map( (element,i) => (
+                {/*   resultado.map( (element,i) => (
                         <tr key={i} className="tr-encabezado">
                             <td>{element.nombre}</td>
                             <td>{element.condicion}</td>
@@ -62,7 +62,7 @@ const ContainerNameCity = (props) =>{
                         </tr>
                         )
                     ) 
-                }
+                */}
                 </tbody>
             </Table>
         </Container>

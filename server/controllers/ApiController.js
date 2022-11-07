@@ -35,7 +35,6 @@ const mainController = {
                     })
                 }                
                 else{
-                    console.log("no registro")
                     return res.status(404).json({
                         code : "404",
                         status : "Búsquedas sin resultados",
