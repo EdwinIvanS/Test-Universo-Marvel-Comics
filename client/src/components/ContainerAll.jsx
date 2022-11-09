@@ -3,7 +3,9 @@ import Container from "react-bootstrap/Container";
 import { UseFetchAllCharacters } from "./hooks/UseFetchAllCharacters";
 
 const ContainerAll = () => {
+
     const { seleccion } = UseFetchAllCharacters();
+    
     UseFetchAllCharacters();
 
     return(

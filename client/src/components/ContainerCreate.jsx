@@ -7,9 +7,8 @@ import {optionsConditions} from './list/listCondicion';
 import {optionsGrups} from './list/listGrup';
 import {optionsTipoPower} from './list/listTipoPower';
 import { optionsCiudad } from "./list/listCiudad";
-import axios from 'axios';
 import { Navigate } from "react-router-dom"
-
+import { ServiceCreate } from './services/task.api'
 
 const ContainerCreate = () =>{
     
@@ -22,20 +21,8 @@ const ContainerCreate = () =>{
         
     const storade = async(e)=>{
         try {
-            await axios.post('http://localhost:3001/api/createCharacters',{
-                method: "post",
-                headers: {
-                "Accept": "application/JSON",
-                "Content-Type": "application/json"
-                },    
-                nombre:nombre, 
-                id_grupo: id_grupo, 
-                id_operacion: id_operacion, 
-                id_condicion: id_condicion, 
-                imagen:imagen 
-            })
-            
-            return Navigate('/').alert('Registro Creado');
+            await ServiceCreate(nombre, id_grupo, id_operacion, id_condicion, imagen);
+            return Navigate('/')
         } catch (error) {console.log(error)}
         
     }

@@ -1,33 +1,22 @@
-import React,{ useEffect, useState} from "react";
+import React,{ useState } from "react";
 import Container from "react-bootstrap/Container";
 import Table  from "react-bootstrap/Table";
+import { UseFetchNameCity } from "./hooks/UseFetchNameCity";
 
-const ContainerNameCity = () =>{
+const ContainerNameCity = (props) =>{
 
-    const[seleccion, setSeleccion] = useState([]);
+    const { seleccion } = UseFetchNameCity();
     const[search, setSearch] = useState("");
     const[modal , setModal] = useState("");
+    let resultado=""; 
 
-    const showData = () =>{ 
-        const fetchSelectAll = async () => {
-            fetch(`http://localhost:3001/api/allCharacters`)
-            .then(consulta =>  consulta.json())
-            .then( resultado => {
-                let array =[];
-                resultado.descripctionAllCharacters?.forEach(e => { array.push(e)}); 
-                setSeleccion(array);
-            })
-        }
-        try { fetchSelectAll()} 
-        catch (error) { console.log(error)}        
-    }
+    UseFetchNameCity();
     
     const searcher = (e) =>{    
-        //setModal(props.consulta)    
-        //setSearch(e.target.value)
-    }
+        setModal(props.consulta)    
+        setSearch(e.target.value)
+    }    
 
-    let resultado="";    
     if(modal==="All_Name"){       
         if(!search) resultado = seleccion;
         else resultado = seleccion.filter((dato)=> dato.nombre.toLowerCase().includes(search.toLowerCase()))        
@@ -35,11 +24,7 @@ const ContainerNameCity = () =>{
         if(!search) resultado = seleccion;
         else resultado = seleccion.filter((dato)=> dato.lugar_operacion.toLowerCase().includes(search.toLowerCase()))
     }
-
-    useEffect(()=>{
-        showData()
-    },[])
-
+    
     return(
         <Container className="container-NameCity">
             <input value={search} onChange={searcher} type="text" className="input-searchs" placeholder="Filter By" />
@@ -53,7 +38,8 @@ const ContainerNameCity = () =>{
                     </tr>
                 </thead>
                 <tbody>
-                {/*   resultado.map( (element,i) => (
+                {   
+                    resultado.map( (element,i) => (
                         <tr key={i} className="tr-encabezado">
                             <td>{element.nombre}</td>
                             <td>{element.condicion}</td>
@@ -62,7 +48,7 @@ const ContainerNameCity = () =>{
                         </tr>
                         )
                     ) 
-                */}
+                }
                 </tbody>
             </Table>
         </Container>

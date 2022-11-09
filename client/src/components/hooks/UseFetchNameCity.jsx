@@ -1,15 +1,18 @@
-import {useState} from "react";
-import { ServiceFetchAllCharacters } from '../components/services/ServiceFetchAllCharacters';
+import { useState, useEffect } from "react";
+import { ServiceFetchAllNameCity } from '../services/task.api'
 
 export const UseFetchNameCity = () =>{
+
     const[seleccion, setSeleccion] = useState([]);
-    const fetchSelectAll = async () => {
-            ServiceFetchAllCharacters()
-            .then( resultado => {
-                let array =[];
-                resultado.descripctionAllCharacters?.forEach(e => { array.push(e)}); 
-                setSeleccion(array);
-            })
-        }
-        return {fetchSelectAll , seleccion }
+
+    useEffect(()=>{
+        ServiceFetchAllNameCity()
+        .then( resultado => {
+            let array =[];
+            resultado.descripctionAllCharacters?.forEach(e => { array.push(e)}); 
+            setSeleccion(array);
+        })
+    },[])
+
+    return { seleccion }
 }

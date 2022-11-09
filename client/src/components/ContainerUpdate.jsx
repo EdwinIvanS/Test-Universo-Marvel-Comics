@@ -2,12 +2,12 @@ import React,{ useState } from "react";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import axios from 'axios';
 import { Navigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import Select from 'react-select';
 import { optionsCiudad } from "./list/listCiudad";
+import {ServiceFetchId, ServiceUpdate} from './services/task.api'
 
 
 const ContainerUpdate  = () => {
@@ -18,36 +18,22 @@ const ContainerUpdate  = () => {
 
     const update = async(e)=>{
         try {
-            await axios.put(`http://localhost:3001/api/updateCharacters/${id}`,{
-                method: "put",
-                headers: {
-                "Accept": "application/JSON",
-                "Content-Type": "application/json"
-                },
-                id : id,    
-                nombre: nombre,
-                id_Ope : idOperacion
-            })
-            Navigate('/');
+            await ServiceUpdate(id, nombre, idOperacion)
+            return Navigate('/');
         } catch (error) {console.log(error)}
     }
 
     const consultaId = () =>{
         try {
-        fetch(`http://localhost:3001/api/Character/${id}`)
-    .then(consulta =>  consulta.json())
-        .then(resultado => {
+            ServiceFetchId(id)
+            .then(resultado => {
             if(resultado.code==='200'){ 
                 setNombre(resultado.character[0].nombre);  
                 setIdOperacion(resultado.character[0].id_operacion);
             }
-            else{
-                return alert("No existe informacion para el registro consultado");                
-            }
+            else{ return alert("No existe informacion para el registro consultado")}
         })
-        } catch (error) {
-            console.log(error);
-        }
+        } catch (error) { console.log(error)}
     }
 
     return (
@@ -77,13 +63,6 @@ const ContainerUpdate  = () => {
                                 value={ optionsCiudad[idOperacion-1] }
                                 onChange={(e)=> setIdOperacion(e.value)}                                
                         />
-                        {/*
-                        <Form.Control   name="id_operacion" 
-                                        type="text"
-                                        value={Lugar_operacion} 
-                                        onChange={(e)=> setLugar_operacion(e.target.value)}
-                        />
-                        */}
                         {/*state.errors.id_operacion && <p>{state.errors.id_operacion}</p>*/}
                     </div>
                                         

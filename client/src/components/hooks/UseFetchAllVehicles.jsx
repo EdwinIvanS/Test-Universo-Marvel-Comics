@@ -4,7 +4,7 @@ import { ServiceFetchAllVehicle } from '../services/task.api'
 export const UseFetchAllVehicles = () =>{
 
     const[seleccion, setSeleccion] = useState([]);
-
+    
     useEffect(()=>{
         ServiceFetchAllVehicle()
         .then( resultado => {
